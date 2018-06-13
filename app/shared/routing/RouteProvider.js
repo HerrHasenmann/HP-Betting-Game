@@ -10,24 +10,46 @@ function RouteService($location) {
     var serv = this;
 
     var routes = {
-        "default": {
-            "id": "default",
-            "name": "Default",
-            "template": "<default></default>"
+        "home": {
+            "id": "home",
+            "name": "Startseite",
+            "template": "<home></home>",
+            "icon": "home"
         },
-        "colorSample": {
-            "id": "colorSample",
-            "name": "Color Sample",
-            "template": "<color-sample></color-sample>"
+        "groups": {
+            "id": "groups",
+            "name": "Gruppenhase",
+            "template": "<groups></groups>",
+            "icon": "account-group"
         },
-        "momentSample": {
-            "id": "momentSample",
-            "name": "Moment Sample",
-            "template": "<moment-sample></moment-sample>"
+        "roundOf16": {
+            "id": "roundOf16",
+            "name": "8-tel Finale",
+            "template": "<round-of-16></round-of-16>",
+            "icon": "numeric-8-box-multiple-outline"
+        },
+        "quarterFinals": {
+            "id": "quarterFinals",
+            "name": "4-tel Finale",
+            "template": "<quarter-finals></quarter-finals>",
+            "icon": "numeric-4-box-multiple-outline"
+        },
+        "semiFinals": {
+            "id": "semiFinals",
+            "name": "Halbfinale",
+            "template": "<semi-finals></semi-finals>",
+            "icon": "tournament"
+        }
+        ,
+        "finals": {
+            "id": "finals",
+            "name": "Finale",
+            "template": "<finals></finals>",
+            "icon": "trophy"
         }
     };
 
-    var defaultRoute = routes["default"];
+    var defaultRoute = routes["home"];
 
     var redirects = [
         // Sample

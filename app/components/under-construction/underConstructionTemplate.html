@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<md-card>
+    <md-toolbar class="md-accent">
+        <div class="md-toolbar-tools">
+            <md-icon style="margin: inherit" md-svg-icon="information-outline" class="md-card-image"></md-icon>
+            <span style="margin-left: 20px">Information</span>
+        </div>
+    </md-toolbar>
+
+    <div style="padding: 20px;" layout="column">
+        <p>Diese Funktion ist momentan noch in Entwicklung und steht bald zur Verfügung.</p>
+
+        <p>Kleine hochmotivierte Hasen arbeiten daran. Sie würden sich über ein Möhrchen freuen.</p>
+
+        <div layout="row" layout-align="center center" ng-if="$ctrl.isReady">
+            <md-icon style="margin: inherit" md-svg-icon="rabbit"></md-icon>
+            <md-icon style="margin: inherit; fill: #ff4000;" ng-if="$ctrl.isCarrotDonator" md-svg-icon="carrot"></md-icon>
+        </div>
+        <div layout="row" layout-align="center center" ng-if="!$ctrl.isCarrotDonator && $ctrl.isReady">
+            <md-button class="md-raised" md-colors="{background: 'warn'}" ng-click="$ctrl.donateCarrot()">
+                <span>Möhrchen spendieren</span>
+            </md-button>
+        </div>
+    </div>
+</md-card>

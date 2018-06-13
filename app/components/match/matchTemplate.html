@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<div layout="column">
+
+    <div layout="row" layout-align="center center" layout-padding md-colors="{background: 'primary'}" md-whiteframe="1">
+        <span class="md-title">Spiel {{$ctrl.match.name}}</span>
+        <span ng-if="$ctrl.match.group" style="margin-left: 4px;">{{"(Gruppe "}}{{$ctrl.match.group | uppercase}}{{")"}}</span>
+    </div>
+
+    <div layout="row" layout-align="start center" layout-padding md-colors="{background: 'accent'}" style="white-space: nowrap" md-whiteframe="1">
+
+        <div flex="45" layout="row" layout-align="center center" style="margin-left: 8px; margin-right: 8px;">
+            <img ng-src="{{$ctrl.homeTeam.flag}}" style="height: 19px">
+            <span style="margin-left: 8px; margin-right: 8px;">{{"teams."+$ctrl.homeTeam.name | translate}}</span>
+        </div>
+        <div flex="10" layout="row" layout-align="center center">
+            vs.
+        </div>
+        <div flex="45" layout="row" layout-align="center center" style="margin-left: 8px; margin-right: 8px;">
+            <span style="margin-left: 8px; margin-right: 8px;">{{"teams."+$ctrl.awayTeam.name | translate}}</span>
+            <img ng-src="{{$ctrl.awayTeam.flag}}" style="height: 19px">
+        </div>
+
+    </div>
+
+    <div layout="column" layout-align="stretch center" layout-padding ng-if="!$ctrl.isMatchFinished()">
+        <span class="md-caption" style="text-align: center">Dein Tipp</span>
+
+        <div layout="row" layout-align="space-around center">
+
+            <div flex="45" layout="row" layout-align="center center">
+                <guess ng-model="$ctrl.guessHome" ng-change="$ctrl.setBetting('homeTeam', $ctrl.guessHome)"></guess>
+            </div>
+            <div flex="10" layout="row" layout-align="center center">
+                :
+            </div>
+            <div flex="45" layout="row" layout-align="center center">
+                <guess ng-model="$ctrl.guessAway" ng-change="$ctrl.setBetting('awayTeam', $ctrl.guessAway)"></guess>
+            </div>
+
+        </div>
+    </div>
+
+    <div layout="column" layout-align="stretch center" layout-padding ng-if="$ctrl.isMatchFinished()">
+
+        <div layout="row" layout-align="space-around center">
+
+            <div flex="45" layout="row" layout-align="center center">
+                <span class="md-title">2</span>
+                <span class="md-subhead" style="margin-left: 4px;">(2)</span>
+            </div>
+            <div flex="10" layout="row" layout-align="center center">
+                :
+            </div>
+            <div flex="45" layout="row" layout-align="center center">
+                <span class="md-title">1</span>
+                <span class="md-subhead" style="margin-left: 4px;">(2)</span>
+            </div>
+
+        </div>
+
+        <div layout="row" layout-align="center center">
+            <span class="md-caption" style="text-align: center; font-weight: bold">Ergebnis</span>
+            <span class="md-caption" style="margin-left: 4px;">(Tipp)</span>
+        </div>
+    </div>
+
+    <md-divider></md-divider>
+
+    <div layout="row" layout-align="end center" layout-padding>
+        <span class="md-caption" ng-if="!$ctrl.data.finished">{{$ctrl.getKickOffDate()}}</span>
+        <span class="md-caption" ng-if="$ctrl.isMatchFinished()" style="margin-left: 4px;">(beendet)</span>
+    </div>
+
+</div>

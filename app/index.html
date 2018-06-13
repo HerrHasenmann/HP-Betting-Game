@@ -13,23 +13,52 @@
     <!-- Custom Styles -->
     <link rel="stylesheet" href="./assets/css/styles.min.css">
 </head>
-<body ng-cloak>
+<body ng-cloak layout="row" ng-controller="AuthenticationController as $ctrl">
 
-<!-- TODO add application + routes in RouteProvider.js -->
-<div ng-view></div>
+<div flex layout="row" layout-align="center center" ng-if="!$ctrl.isAuthenticationReady()">
+    <md-progress-circular></md-progress-circular>
+</div>
+
+<div flex layout="column" ng-if="$ctrl.isAuthenticationReady()">
+    <div ng-if="!$ctrl.isAuthenticated()" flex layout="column" layout-align="center center">
+            <login></login>
+    </div>
+
+    <div ng-if="$ctrl.isAuthenticated()" flex layout="row">
+        <sidenav layout="column"></sidenav>
+
+        <div layout="column" flex>
+            <toolbar></toolbar>
+            <md-content flex ng-view>
+                <!--<div ></div>-->
+            </md-content>
+        </div>
+    </div>
+</div>
+
+
+
 
 <!-- AngularJS -->
 <script src="./node_modules/angular/angular.min.js"></script>
 <script src="./node_modules/angular-aria/angular-aria.min.js"></script>
 <script src="./node_modules/angular-animate/angular-animate.min.js"></script>
+<script src="./node_modules/angular-messages/angular-messages.min.js"></script>
 <script src="./node_modules/angular-route/angular-route.min.js"></script>
+<script src="./node_modules/angular-translate/dist/angular-translate.min.js"></script>
+<script src="./node_modules/angular-translate/dist/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
 
 <!-- Material Angular -->
 <script src="./node_modules/angular-material/angular-material.min.js"></script>
 <script src="./node_modules/angular-material-data-table/dist/md-data-table.min.js"></script>
 
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+<script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
+
 <!-- Utils -->
 <script src="./node_modules/moment/min/moment-with-locales.min.js"></script>
+<script src="./node_modules/angular-moment/angular-moment.min.js"></script>
 <script src="./assets/js/objectifier.min.js"></script>
 
 <!-- Javascript of application-->
@@ -42,17 +71,32 @@
 <!-- Controller -->
 <script src="./shared/root/RootController.min.js"></script>
 <script src="./shared/title/TitleController.min.js"></script>
+<script src="./shared/authentication/AuthenticationController.min.js"></script>
 
 <!-- Services -->
 <script src="./shared/title/TitleService.min.js"></script>
+<script src="shared/data/DataService.min.js"></script>
+<script src="./shared/authentication/AuthenticationService.min.js"></script>
 
 <!-- Filter -->
 <script src="./node_modules/angular-toarrayfilter/toArrayFilter.js"></script>
 
 <!-- Components -->
-<script src="./components/color-sample/colorSampleComponent.min.js"></script>
-<script src="./components/moment-sample/momentSampleComponent.min.js"></script>
-<script src="./components/default/defaultComponent.js"></script>
+<script src="./components/sidenav/sidenavComponent.min.js"></script>
+<script src="./components/toolbar/toolbarComponent.min.js"></script>
+<script src="./components/home/homeComponent.min.js"></script>
+<script src="./components/finals/finalsComponent.min.js"></script>
+<script src="./components/groups/groupsComponent.min.js"></script>
+<script src="./components/roundOf16/roundOf16Component.js"></script>
+<script src="./components/semiFinals/semiFinalsComponent.min.js"></script>
+<script src="./components/quarterFinals/quarterFinalsComponent.min.js"></script>
+<script src="./components/rules/rulesComponent.min.js"></script>
+<script src="./components/login/loginComponent.min.js"></script>
+<script src="./components/match/matchComponent.min.js"></script>
+<script src="./components/under-construction/underConstructionComponent.min.js"></script>
+
+<!-- Directives -->
+<script src="directives/guess/guessDirective.min.js"></script>
 
 </body>
 </html>

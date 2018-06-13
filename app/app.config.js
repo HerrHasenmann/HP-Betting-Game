@@ -13,17 +13,32 @@ app.config(["$mdGestureProvider", function ($mdGestureProvider) {
     $mdGestureProvider.skipClickHijack();
 }]);
 
+app.config([function () {
+    moment.locale('de');
+}]);
+
 // Sets the theme for the app
 app.config(["$mdThemingProvider", function ($mdThemingProvider) {
     $mdThemingProvider.theme('default')
-        .primaryPalette('indigo', {
-            "default": "700"
+        .primaryPalette('green', {
+            "default": "600"
         })
         .accentPalette('blue-grey', {
             "default": "500"
         })
         .warnPalette('deep-orange')
         .backgroundPalette('grey');
+}]);
+
+// Settings for the translation service
+app.config(['$translateProvider', function($translateProvider) {
+    $translateProvider.useStaticFilesLoader({
+        prefix: './i18n/locale-',
+        suffix: '.json'
+    });
+    $translateProvider.preferredLanguage('de');
+
+    $translateProvider.useSanitizeValueStrategy(null);
 }]);
 
 // Sets the different routes for the app

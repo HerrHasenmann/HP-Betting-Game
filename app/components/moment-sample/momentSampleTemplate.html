@@ -1,9 +1,0 @@
-<!DOCTYPE html>
-
-<md-card layout="row" layout-margin style="display: table">
-    <div ng-repeat="sample in $ctrl.samples track by $index" style="display: table-row">
-        <div style="display: table-cell; text-align: end">{{sample}}</div>
-        <div style="display: table-cell"><span style="margin: 12px"></span></div>
-        <div style="display: table-cell">{{$ctrl.sampleHints[$index]}}</div>
-    </div>
-</md-card>

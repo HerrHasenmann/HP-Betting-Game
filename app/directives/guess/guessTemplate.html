@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<md-menu md-offset="-58 -58">
+    <md-button class="md-icon-button" ng-click="$mdMenu.open($event)">
+        <md-icon ng-if="!hasGuess()" md-svg-icon="help"></md-icon>
+        <span class="md-title" ng-if="hasGuess()">{{model.$viewValue}}</span>
+    </md-button>
+    <md-menu-content style="padding: 0">
+        <md-menu-item style="display: none"></md-menu-item>
+        <div layout="column" layout-align="space-around" style="min-height: 156px">
+            <div ng-repeat="guessLine in guessFormation" layout="row" layout-align="space-around center">
+                <md-button ng-repeat="guess in guessLine" ng-click="setValue(guess)" class="md-icon-button" ng-class="{'md-primary md-raised': guess == model.$viewValue}">{{guess}}</md-button>
+            </div>
+        </div>
+    </md-menu-content>
+</md-menu>

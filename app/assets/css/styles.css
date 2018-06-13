@@ -1,3 +1,23 @@
 md-input-container.md-no-error div.md-errors-spacer:empty {
+    min-height: 0;
+}
+
+md-list-item md-icon {
+    margin: initial;
+}
+
+/* Enables to use md-tabs without the tab header bar */
+md-tabs.md-no-bar md-tabs-wrapper {
     display: none;
+}
+
+/*
+    Style for sidenav
+*/
+md-sidenav .active-route {
+    background-color: #eaeaea;
+}
+
+md-sidenav {
+    width: inherit;
 }

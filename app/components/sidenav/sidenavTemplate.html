@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<md-sidenav flex md-component-id="left" class="md-sidenav-left" md-is-locked-open="$mdMedia('gt-sm')" md-whiteframe="4" layout="column">
+    <md-toolbar md-whiteframe="2" md-colors="{background: 'primary-hue-2'}">
+        <div class="md-toolbar-tools" style="padding-left: 0;" layout="row" layout-align="center center">
+            Menü
+            <!--<img ng-src="./assets/img/conrad_business_logo_regular.svg" style="max-height: 100%; padding: 8px">-->
+        </div>
+    </md-toolbar>
+
+    <md-list flex>
+        <md-list-item ng-repeat="route in $ctrl.routes" ng-click="$ctrl.changeRoute(route)" layout="row" layout-align="start center" ng-class="{'active-route': $ctrl.isActiveRoute(route)}">
+            <md-icon md-colors="{fill: 'accent'}" md-svg-icon="{{route.icon}}"></md-icon>
+            {{route.name}}
+        </md-list-item>
+    </md-list>
+
+</md-sidenav>

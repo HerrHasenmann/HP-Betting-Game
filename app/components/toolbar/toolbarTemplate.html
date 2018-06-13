@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<md-toolbar md-whiteframe="4">
+    <div class="md-toolbar-tools">
+
+        <md-button show-xs show-sm hide class="md-icon-button" ng-click="$ctrl.toggleSidenav()">
+            <md-icon md-svg-icon="menu"></md-icon>
+        </md-button>
+
+        <span>{{$ctrl.title()}}</span>
+
+        <span flex></span>
+
+        <md-button ng-click="$ctrl.showRules($event)" ng-class="{'md-icon-button': $root.$mdMedia('xs')}">
+            <span hide-xs>Regeln</span>
+            <md-icon md-svg-icon="information-outline"></md-icon>
+        </md-button>
+
+
+        <md-button ng-click="$ctrl.logout()" ng-class="{'md-icon-button': $root.$mdMedia('xs')}">
+            <span hide-xs>Ausloggen</span>
+            <md-icon md-svg-icon="logout"></md-icon>
+        </md-button>
+    </div>
+</md-toolbar>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<div layout="column" layout-align="center center">
+    <md-card layout="column" style="padding: 32px">
+        <div class="md-title" layout="row" layout-align="start center">
+            <md-icon md-svg-icon="soccer" style="margin: inherit;"></md-icon>
+            <span style="margin-left: 8px">WM 2018 Tippspiel</span>
+        </div>
+
+        <div layout="column" style="margin-top: 20px; margin-bottom: 20px">
+            <span class="md-headline">Login</span>
+            <span>{{$ctrl.hint()}}</span>
+        </div>
+
+        <form name="$ctrl.loginForm">
+            <md-tabs md-dynamic-height="true" class="md-no-bar" md-selected="$ctrl.selectedTabIndex">
+                <md-tab>
+                    <md-tab-body>
+                        <div layout="column">
+                            <md-input-container class="md-no-error">
+                                <input name="email" type="email" placeholder="E-Mail Adresse" ng-model="$ctrl.user.email">
+                                <div ng-messages="$ctrl.loginForm.email.$error">
+                                    <div ng-message="emailInvalid">Die E-Mail Adresse ist ungültig</div>
+                                    <div ng-message="notFound">Ein Nutzer mit dieser E-Mail Adresse existiert nicht</div>
+                                </div>
+                            </md-input-container>
+
+                            <div layout="row" layout-align="end center">
+                                <md-button ng-click="$ctrl.selectedTabIndex = 1" class="md-raised md-primary" ng-disabled="!$ctrl.user.email">
+                                    Weiter
+                                </md-button>
+                            </div>
+
+                        </div>
+                    </md-tab-body>
+                </md-tab>
+                <md-tab>
+                    <md-tab-body>
+                        <div layout="column">
+                            <md-input-container class="md-no-error">
+                                <input name="password" type="password" placeholder="Passwort" ng-model="$ctrl.user.password">
+                                <div ng-messages="$ctrl.loginForm.password.$error">
+                                    <div ng-message="wrongPassword">Das eingegebene Passwort ist ungültig</div>
+                                </div>
+                            </md-input-container>
+
+                            <div layout="row" layout-align="end center">
+                                <md-button ng-click="$ctrl.selectedTabIndex = 0" class="">
+                                    Zurück
+                                </md-button>
+                                <span flex></span>
+                                <md-button ng-click="$ctrl.selectedTabIndex = 2; $ctrl.login()" class="md-raised md-primary" ng-disabled="!$ctrl.user.password">
+                                    Einloggen
+                                </md-button>
+                            </div>
+
+                        </div>
+                    </md-tab-body>
+                </md-tab>
+                <md-tab>
+                    <md-tab-body>
+                        <div layout="column" layout-align="center center">
+                            <md-progress-circular></md-progress-circular>
+
+                        </div>
+                    </md-tab-body>
+                </md-tab>
+            </md-tabs>
+        </form>
+
+
+
+    </md-card>
+
+    <div layout="row" layout-align="center center">
+        <span>Kein Account?</span>
+        <md-button class="md-primary" ng-click="$ctrl.registerDialog()">
+            <span>Registrieren</span>
+            <md-icon md-svg-icon="playlist-edit"></md-icon>
+        </md-button>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+{
+  "general": {
+    "group": "Gruppe"
+  },
+  "teams": {
+    "Russia" : "Russland",
+    "Saudi Arabia" : "Saudi Arabien",
+    "Egypt" : "Ägypten",
+    "Uruguay" : "Uruguay",
+    "Portugal" : "Portugal",
+    "Spain" : "Spanien",
+    "Morocco" : "Marokko",
+    "Iran" : "Iran",
+    "Australia" : "Australien",
+    "Peru" : "Peru",
+    "Denmark" : "Dänemark",
+    "Argentina" : "Argentinien",
+    "Iceland" : "Island",
+    "Croatia" : "Kroatien",
+    "Nigeria" : "Nigeria",
+    "Brazil" : "Brasilien",
+    "Switzerland" : "Schweiz",
+    "Costa Rica" : "Costa Rica",
+    "Serbia" : "Serbien",
+    "Germany" : "Deutschland",
+    "Mexico" : "Mexiko",
+    "Sweden" : "Schweden",
+    "South Korea" : "Südkorea",
+    "Belgium" : "Belgien",
+    "Panama" : "Panama",
+    "Tunisia" : "Tunesien",
+    "England" : "England",
+    "Poland" : "Polen",
+    "Senegal" : "Senegal",
+    "Colombia": "Kolumbien",
+    "Japan": "Japan",
+    "France": "Frankreich"
+  }
+}
