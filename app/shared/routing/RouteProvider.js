@@ -10,46 +10,56 @@ function RouteService($location) {
     var serv = this;
 
     var routes = {
-        "home": {
-            "id": "home",
-            "name": "Startseite",
-            "template": "<home></home>",
-            "icon": "home"
+        "sidenav": {
+            "home": {
+                "id": "home",
+                "name": "Startseite",
+                "template": "<home></home>",
+                "icon": "home"
+            },
+            "groups": {
+                "id": "groups",
+                "name": "Gruppenhase",
+                "template": "<groups></groups>",
+                "icon": "account-group"
+            },
+            "roundOf16": {
+                "id": "roundOf16",
+                "name": "8-tel Finale",
+                "template": "<round-of-16></round-of-16>",
+                "icon": "numeric-8-box-multiple-outline"
+            },
+            "quarterFinals": {
+                "id": "quarterFinals",
+                "name": "4-tel Finale",
+                "template": "<quarter-finals></quarter-finals>",
+                "icon": "numeric-4-box-multiple-outline"
+            },
+            "semiFinals": {
+                "id": "semiFinals",
+                "name": "Halbfinale",
+                "template": "<semi-finals></semi-finals>",
+                "icon": "tournament"
+            }
+            ,
+            "finals": {
+                "id": "finals",
+                "name": "Finale",
+                "template": "<finals></finals>",
+                "icon": "trophy"
+            }
         },
-        "groups": {
-            "id": "groups",
-            "name": "Gruppenhase",
-            "template": "<groups></groups>",
-            "icon": "account-group"
-        },
-        "roundOf16": {
-            "id": "roundOf16",
-            "name": "8-tel Finale",
-            "template": "<round-of-16></round-of-16>",
-            "icon": "numeric-8-box-multiple-outline"
-        },
-        "quarterFinals": {
-            "id": "quarterFinals",
-            "name": "4-tel Finale",
-            "template": "<quarter-finals></quarter-finals>",
-            "icon": "numeric-4-box-multiple-outline"
-        },
-        "semiFinals": {
-            "id": "semiFinals",
-            "name": "Halbfinale",
-            "template": "<semi-finals></semi-finals>",
-            "icon": "tournament"
-        }
-        ,
-        "finals": {
-            "id": "finals",
-            "name": "Finale",
-            "template": "<finals></finals>",
-            "icon": "trophy"
+        "hidden": {
+            "privacy": {
+                "id": "privacy",
+                "name": "Datenschutzerklärung",
+                "template": "<privacy></privacy>",
+                "icon": "security"
+            }
         }
     };
 
-    var defaultRoute = routes["home"];
+    var defaultRoute = routes.sidenav["home"];
 
     var redirects = [
         // Sample
@@ -60,7 +70,7 @@ function RouteService($location) {
     ];
 
     serv.getRoutes = function () {
-        return routes
+        return routes.sidenav
     };
 
     serv.getDefaultRoute = function () {
@@ -71,13 +81,21 @@ function RouteService($location) {
         return redirects;
     };
 
+    serv.getHiddenRoutes = function () {
+        return routes.hidden;
+    };
+
     serv.getRoute = function () {
         var path = $location.path();
 
         if(path === "/"){
             return defaultRoute;
         } else {
-            return routes[path.slice(1)];
+            if(routes.sidenav[path.slice(1)]){
+                return routes.sidenav[path.slice(1)]
+            } else if(routes.hidden[path.slice(1)]){
+                return routes.hidden[path.slice(1)]
+            }
         }
     };
 

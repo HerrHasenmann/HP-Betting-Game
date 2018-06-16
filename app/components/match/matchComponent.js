@@ -24,7 +24,23 @@ function MatchController($rootScope, DataService, AuthenticationService) {
         var kickOffMoment = moment(ctrl.match.date).local();
         var differenceInMinutes = currentMoment.diff(kickOffMoment, "minutes");
 
-        if(differenceInMinutes >= 90){
+        if(differenceInMinutes >= 120){
+            return true;
+        }
+    };
+
+    ctrl.isMatchStarted = function () {
+        var currentMoment = moment();
+        var kickOffMoment = moment(ctrl.match.date).local();
+        var differenceInMinutes = currentMoment.diff(kickOffMoment, "minutes");
+
+        if(differenceInMinutes >= 0){
+            return true;
+        }
+    };
+
+    ctrl.isGuessed = function (guess) {
+        if(ctrl.guessHome >= 0 && ctrl.guessAway >= 0 && ctrl.guessHome !== null && ctrl.guessAway !== null){
             return true;
         }
     };

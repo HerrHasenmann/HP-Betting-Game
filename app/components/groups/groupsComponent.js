@@ -1,11 +1,17 @@
 app.component("groups", {
     templateUrl: "./components/groups/groupsTemplate.html",
-    controller: ["DataService", GroupController]
+    controller: ["$timeout", "DataService", GroupController]
 });
 
-function GroupController(DataService) {
+function GroupController($timeout, DataService) {
 
     var ctrl = this;
 
     ctrl.groups = DataService.getGroups;
+
+    ctrl.$onInit = function () {
+        $timeout(function () {
+            ctrl.isReady = true;
+        }, 500);
+    }
 }

@@ -1,6 +1,7 @@
 node_modules/
 *.min.js
 *.min.css
+./app/firebase.config.js
 
 ### STS ###
 .apt_generated

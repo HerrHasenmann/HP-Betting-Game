@@ -1,21 +1,53 @@
 <!DOCTYPE html>
-<div layout="column" layout-margin>
-    <div layout="row" layout-align="center center">
-        <span class="md-title" ng-if="$ctrl.nextMatches().length == 1">Bevorstehendes Spiel</span>
-        <span class="md-title" ng-if="$ctrl.nextMatches().length > 1">Bevorstehende Spiele</span>
-    </div>
+<div layout="row" layout-xs="column" layout-align="center center" layout-margin>
 
-    <div ng-if="$ctrl.nextMatches().length == 1" layout="row" layout-align="center center">
-            <md-card ng-repeat="match in $ctrl.nextMatches()">
-                <match match="match"></match>
-            </md-card>
-    </div>
+    <div flex-order-xs="1" layout="column">
+        <div layout="row" layout-align="center center">
+            <div ng-if="$ctrl.previousMatches().length == 1">
+                <span ng-if="$ctrl.isMatchFinished($ctrl.previousMatches()[0])" class="md-title">Letztes Spiel</span>
+                <span ng-if="!$ctrl.isMatchFinished($ctrl.previousMatches()[0])" class="md-title">Aktuelles Spiel</span>
+            </div>
+            <div ng-if="$ctrl.previousMatches().length > 1">
+                <span ng-if="$ctrl.isMatchFinished($ctrl.previousMatches()[0])" class="md-title">Letzte Spiele</span>
+                <span ng-if="!$ctrl.isMatchFinished($ctrl.previousMatches()[0])" class="md-title">Aktuelle Spiele</span>
 
-    <div ng-if="$ctrl.nextMatches().length > 1" layout="row" layout-wrap>
-        <div flex-xs="100" flex-sm="50" flex-md="50" flex-lg="33" flex-xl="25" ng-repeat="match in $ctrl.nextMatches()">
-            <md-card>
+            </div>
+        </div>
+
+        <div ng-if="$ctrl.previousMatches().length == 1" layout="row" layout-align="center center">
+            <md-card ng-repeat="match in $ctrl.previousMatches()">
                 <match match="match"></match>
             </md-card>
         </div>
+
+        <div ng-if="$ctrl.previousMatches().length > 1" layout="column" layout-wrap>
+            <div flex-xs="100" flex-sm="50" flex-md="50" flex-lg="33" flex-xl="25" ng-repeat="match in $ctrl.previousMatches()">
+                <md-card>
+                    <match match="match"></match>
+                </md-card>
+            </div>
+        </div>
     </div>
+
+    <div flex-order-xs="0" layout="column">
+        <div layout="row" layout-align="center center">
+            <span class="md-title" ng-if="$ctrl.nextMatches().length == 1">Bevorstehendes Spiel</span>
+            <span class="md-title" ng-if="$ctrl.nextMatches().length > 1">Bevorstehende Spiele</span>
+        </div>
+
+        <div ng-if="$ctrl.nextMatches().length == 1" layout="row" layout-align="center center">
+                <md-card ng-repeat="match in $ctrl.nextMatches()">
+                    <match match="match"></match>
+                </md-card>
+        </div>
+
+        <div ng-if="$ctrl.nextMatches().length > 1" layout="column" layout-wrap>
+            <div flex-xs="100" flex-sm="50" flex-md="50" flex-lg="33" flex-xl="25" ng-repeat="match in $ctrl.nextMatches()">
+                <md-card>
+                    <match match="match"></match>
+                </md-card>
+            </div>
+        </div>
+    </div>
+
 </div>

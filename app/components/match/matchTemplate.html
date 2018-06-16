@@ -22,45 +22,45 @@
 
     </div>
 
-    <div layout="column" layout-align="stretch center" layout-padding ng-if="!$ctrl.isMatchFinished()">
+    <div layout="column" layout-align="stretch center" layout-padding ng-if="!$ctrl.isMatchStarted()">
         <span class="md-caption" style="text-align: center">Dein Tipp</span>
 
         <div layout="row" layout-align="space-around center">
 
             <div flex="45" layout="row" layout-align="center center">
-                <guess ng-model="$ctrl.guessHome" ng-change="$ctrl.setBetting('homeTeam', $ctrl.guessHome)"></guess>
+                <guess ng-model="$ctrl.guessHome" ng-change="$ctrl.setBetting('homeTeam', $ctrl.guessHome)" ng-disabled="$ctrl.isMatchStarted()"></guess>
             </div>
             <div flex="10" layout="row" layout-align="center center">
                 :
             </div>
             <div flex="45" layout="row" layout-align="center center">
-                <guess ng-model="$ctrl.guessAway" ng-change="$ctrl.setBetting('awayTeam', $ctrl.guessAway)"></guess>
+                <guess ng-model="$ctrl.guessAway" ng-change="$ctrl.setBetting('awayTeam', $ctrl.guessAway)" ng-disabled="$ctrl.isMatchStarted()"></guess>
             </div>
 
         </div>
     </div>
 
-    <div layout="column" layout-align="stretch center" layout-padding ng-if="$ctrl.isMatchFinished()">
+    <div layout="column" layout-align="stretch center" layout-padding ng-if="$ctrl.isMatchStarted()">
 
-        <div layout="row" layout-align="space-around center">
+        <div layout="row" layout-align="center center">
+            <span class="md-caption" style="text-align: center; font-weight: bold">Ergebnis</span>
+            <span class="md-caption" style="margin-left: 4px;">(Tipp)</span>
+        </div>
+
+        <div layout="row" layout-align="space-around center" style="height: 56px">
 
             <div flex="45" layout="row" layout-align="center center">
-                <span class="md-title">2</span>
-                <span class="md-subhead" style="margin-left: 4px;">(2)</span>
+                <span class="md-title">{{$ctrl.match.home_result}}</span>
+                <span class="md-subhead" style="margin-left: 4px;">{{"("}}{{$ctrl.isGuessed() ? $ctrl.guessHome : " - "}}{{")"}}</span>
             </div>
             <div flex="10" layout="row" layout-align="center center">
                 :
             </div>
             <div flex="45" layout="row" layout-align="center center">
-                <span class="md-title">1</span>
-                <span class="md-subhead" style="margin-left: 4px;">(2)</span>
+                <span class="md-title">{{$ctrl.match.away_result}}</span>
+                <span class="md-subhead" style="margin-left: 4px;">{{"("}}{{$ctrl.isGuessed() ? $ctrl.guessAway : " - "}}{{")"}}</span>
             </div>
 
-        </div>
-
-        <div layout="row" layout-align="center center">
-            <span class="md-caption" style="text-align: center; font-weight: bold">Ergebnis</span>
-            <span class="md-caption" style="margin-left: 4px;">(Tipp)</span>
         </div>
     </div>
 

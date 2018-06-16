@@ -49,6 +49,7 @@ app.config(["$routeProvider", "$injector", "RouteServiceProvider", function ($ro
     var defaultRoute = RouteService.getDefaultRoute();
     var routes = RouteService.getRoutes();
     var redirects = RouteService.getRedirects();
+    var hiddenRoutes = RouteService.getHiddenRoutes();
 
     // Set default route
     $routeProvider
@@ -67,6 +68,13 @@ app.config(["$routeProvider", "$injector", "RouteServiceProvider", function ($ro
     angular.forEach(redirects, function (redirect, index) {
         $routeProvider.when("/" + redirect["when"], {
             redirectTo: "/" + redirect.route.id
+        })
+    });
+
+    // Set hidden routes
+    angular.forEach(hiddenRoutes, function (route, routeId) {
+        $routeProvider.when("/" + routeId, {
+            template: route.template
         })
     });
 

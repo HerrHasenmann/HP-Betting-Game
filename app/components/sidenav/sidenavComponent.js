@@ -16,5 +16,10 @@ function SidenavController ($mdSidenav, RouteService) {
         if(route.id === RouteService.getRoute().id){
             return true;
         }
+    };
+
+    ctrl.redirectToPrivacy = function () {
+        RouteService.setRoute("privacy")
+        $mdSidenav("left").close();
     }
 }

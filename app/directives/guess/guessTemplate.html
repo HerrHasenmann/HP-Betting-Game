@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <md-menu md-offset="-58 -58">
-    <md-button class="md-icon-button" ng-click="$mdMenu.open($event)">
+    <md-button class="md-icon-button" ng-click="$mdMenu.open($event)" ng-disabled="ngDisabled">
         <md-icon ng-if="!hasGuess()" md-svg-icon="help"></md-icon>
         <span class="md-title" ng-if="hasGuess()">{{model.$viewValue}}</span>
     </md-button>

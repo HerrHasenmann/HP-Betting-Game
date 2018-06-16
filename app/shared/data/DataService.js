@@ -4,6 +4,8 @@ app.service("DataService", ["$http", function ($http) {
 
     var data = null;
     var nextMatches = null;
+    var previousMatches = null;
+    var matchesByDate = {};
 
     serv.getData = function () {
 
@@ -21,16 +23,11 @@ app.service("DataService", ["$http", function ($http) {
     };
 
     serv.getNextMatches = function () {
+        return nextMatches;
+    };
 
-        if(nextMatches){
-            return nextMatches;
-        } else {
-            if(data){
-                nextMatches = findNextMatch();
-            } else {
-                return null;
-            }
-        }
+    serv.getPreviousMatches = function () {
+        return previousMatches;
     };
 
     serv.getTeam = function (id) {
@@ -38,11 +35,12 @@ app.service("DataService", ["$http", function ($http) {
     };
 
     serv.getGroups = function () {
-        return data.groups;
+        if (data) {
+            return data.groups;
+        }
     };
 
-    function findNextMatch() {
-
+    function sortMatchesByDate(data) {
         var groups = data.groups;
         var knockouts = data.knockout;
 
@@ -72,15 +70,26 @@ app.service("DataService", ["$http", function ($http) {
             })
         });
 
+        return matchesByDate;
+    }
+
+    function findNextMatches() {
+
+        if(!matchesByDate){
+            matchesByDate = sortMatchesByDate(data);
+        }
+
         var nextMatches = null;
         var diffNextMatches = null;
         var currentMoment = moment();
+
 
         angular.forEach(matchesByDate, function (matches, date) {
 
             var diffToMatches = moment(date).diff(currentMoment);
 
-            if(!diffNextMatches || (diffToMatches > 0 && diffToMatches < diffNextMatches)){
+
+            if( (diffNextMatches === null && diffToMatches > 0) || (diffToMatches > 0 && diffToMatches < diffNextMatches)){
                 nextMatches = matches;
                 diffNextMatches = diffToMatches;
             }
@@ -88,6 +97,32 @@ app.service("DataService", ["$http", function ($http) {
         });
 
         return nextMatches;
+    }
+
+    function findPreviousMatches() {
+
+        if(!matchesByDate){
+            matchesByDate = sortMatchesByDate(data);
+        }
+
+        var previousMatches = null;
+        var diffPreviousMatches = null;
+        var currentMoment = moment();
+
+
+        angular.forEach(matchesByDate, function (matches, date) {
+
+            var diffToMatches = moment(date).diff(currentMoment);
+
+
+            if( (diffPreviousMatches === null && diffToMatches < 0) || (diffToMatches < 0 && diffToMatches > diffPreviousMatches)){
+                previousMatches = matches;
+                diffPreviousMatches = diffToMatches;
+            }
+
+        });
+
+        return previousMatches;
     }
 
     function init() {
@@ -100,6 +135,11 @@ app.service("DataService", ["$http", function ($http) {
 
             $http(config).then(function (response) {
                 data = response.data;
+
+                matchesByDate = sortMatchesByDate(data);
+                nextMatches = findNextMatches();
+                previousMatches = findPreviousMatches();
+
                 resolve(data);
             }, function () {
                 console.error("Could not fetch data");

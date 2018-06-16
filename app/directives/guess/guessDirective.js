@@ -3,7 +3,9 @@ app.directive("guess", [function () {
         templateUrl: "./directives/guess/guessTemplate.html",
         replace: false,
         require: "?ngModel",
-        scope: true,
+        scope: {
+            ngDisabled: "<"
+        },
         link: function (scope, element, attributes, ngModel) {
             scope.model = ngModel;
             scope.guessFormation = [
