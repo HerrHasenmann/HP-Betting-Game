@@ -17,6 +17,12 @@ function RouteService($location) {
                 "template": "<home></home>",
                 "icon": "home"
             },
+            "pointsTable": {
+                "id": "pointsTable",
+                "name": "Punkteübersicht",
+                "template": "<points-table></points-table>",
+                "icon": "table"
+            },
             "groups": {
                 "id": "groups",
                 "name": "Gruppenhase",

@@ -6,6 +6,7 @@ app.service("DataService", ["$http", function ($http) {
     var nextMatches = null;
     var previousMatches = null;
     var matchesByDate = {};
+    var matchesById = {};
 
     serv.getData = function () {
 
@@ -40,21 +41,31 @@ app.service("DataService", ["$http", function ($http) {
         }
     };
 
-    function sortMatchesByDate(data) {
+    serv.getMatches = function () {
+        return matchesById
+    };
+
+    serv.getMatchById = function (id) {
+        return matchesById[id];
+    };
+
+    function sortMatches(data) {
         var groups = data.groups;
         var knockouts = data.knockout;
 
-        var matchesByDate = {};
-
         angular.forEach(groups, function (group, key) {
             angular.forEach(group.matches, function (match, index) {
+
                 var date = moment(match.date).local().format();
                 match.group = key;
+
                 if(matchesByDate.hasOwnProperty(date)){
                     matchesByDate[date].push(match);
                 }else{
                     matchesByDate[date] = [match];
                 }
+
+                matchesById[match.name] = match;
             })
         });
 
@@ -67,16 +78,17 @@ app.service("DataService", ["$http", function ($http) {
                 }else{
                     matchesByDate[date] = [match];
                 }
+
+                matchesById[match.name] = match;
             })
         });
 
-        return matchesByDate;
     }
 
     function findNextMatches() {
 
         if(!matchesByDate){
-            matchesByDate = sortMatchesByDate(data);
+            matchesByDate = sortMatches(data);
         }
 
         var nextMatches = null;
@@ -102,7 +114,7 @@ app.service("DataService", ["$http", function ($http) {
     function findPreviousMatches() {
 
         if(!matchesByDate){
-            matchesByDate = sortMatchesByDate(data);
+            matchesByDate = sortMatches(data);
         }
 
         var previousMatches = null;
@@ -136,7 +148,7 @@ app.service("DataService", ["$http", function ($http) {
             $http(config).then(function (response) {
                 data = response.data;
 
-                matchesByDate = sortMatchesByDate(data);
+                sortMatches(data);
                 nextMatches = findNextMatches();
                 previousMatches = findPreviousMatches();
 

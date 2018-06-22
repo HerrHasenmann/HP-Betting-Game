@@ -4,7 +4,6 @@ app.service("AuthenticationService", ["$firebaseAuth", "$firebaseObject", "$root
 
     var ready = false;
     var user = null;
-    var userDataUnsubscribeFn = null;
 
     serv.isAuthenticated = function () {
         return !!user;
@@ -64,10 +63,6 @@ app.service("AuthenticationService", ["$firebaseAuth", "$firebaseObject", "$root
                         user.name = doc.data().name;
                     })
                 });
-            } else {
-                if (userDataUnsubscribeFn) {
-                    userDataUnsubscribeFn();
-                }
             }
 
             ready = true;

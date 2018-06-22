@@ -1,12 +1,12 @@
 app.component("match", {
     templateUrl: "./components/match/matchTemplate.html",
-    controller: ["$rootScope", "DataService", "AuthenticationService", MatchController],
+    controller: ["$rootScope", "DataService", "UserService", "RuleService", "AuthenticationService", MatchController],
     bindings: {
         match: "<"
     }
 });
 
-function MatchController($rootScope, DataService, AuthenticationService) {
+function MatchController($rootScope, DataService, UserService, RuleService, AuthenticationService) {
 
     var ctrl = this;
     ctrl.homeTeam = null;
@@ -14,6 +14,7 @@ function MatchController($rootScope, DataService, AuthenticationService) {
 
     ctrl.guessHome = null;
     ctrl.guessAway = null;
+    ctrl.guessPoints = 0;
 
     ctrl.getKickOffDate = function () {
         return moment(ctrl.match.date).local().format("LLLL");
@@ -84,6 +85,13 @@ function MatchController($rootScope, DataService, AuthenticationService) {
             }else{
                 ctrl.guessAway = null;
             }
+
+            ctrl.guessPoints = RuleService.getPoints({
+                "homeTeam": ctrl.match.home_result,
+                "awayTeam": ctrl.match.away_result,
+                "guessHome": ctrl.guessHome,
+                "guessAway": ctrl.guessAway
+            });
         })
     }
 }

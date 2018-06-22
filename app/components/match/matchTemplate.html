@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<div layout="column">
+<div flex layout="column">
 
     <div layout="row" layout-align="center center" layout-padding md-colors="{background: 'primary'}" md-whiteframe="1">
         <span class="md-title">Spiel {{$ctrl.match.name}}</span>
@@ -62,7 +62,15 @@
             </div>
 
         </div>
+
+        <div ng-if="$ctrl.isMatchFinished()" layout="row" layout-align="space-around center" style="height: 56px">
+
+            <span>{{$ctrl.guessPoints + " Punkte"}}</span>
+
+        </div>
     </div>
+
+    <span flex></span>
 
     <md-divider></md-divider>
 
@@ -70,5 +78,6 @@
         <span class="md-caption" ng-if="!$ctrl.data.finished">{{$ctrl.getKickOffDate()}}</span>
         <span class="md-caption" ng-if="$ctrl.isMatchFinished()" style="margin-left: 4px;">(beendet)</span>
     </div>
+
 
 </div>
