@@ -44,20 +44,25 @@
 
         <div layout="row" layout-align="center center">
             <span class="md-caption" style="text-align: center; font-weight: bold">Ergebnis</span>
+            <span class="md-caption" style="text-align: center; font-weight: bold; margin-left: 4px" ng-if="$ctrl.match.home_penalty && $ctrl.match.away_penalty">i.E</span>
             <span class="md-caption" style="margin-left: 4px;">(Tipp)</span>
         </div>
 
         <div layout="row" layout-align="space-around center" style="height: 56px">
 
             <div flex="45" layout="row" layout-align="center center">
-                <span class="md-title">{{$ctrl.match.home_result}}</span>
+                <span class="md-title" ng-if="!$ctrl.match.home_penalty">{{$ctrl.match.home_result}}</span>
+                <span class="md-title" ng-if="$ctrl.match.home_penalty">{{$ctrl.match.home_penalty}}</span>
+
                 <span class="md-subhead" style="margin-left: 4px;">{{"("}}{{$ctrl.isGuessed() ? $ctrl.guessHome : " - "}}{{")"}}</span>
             </div>
             <div flex="10" layout="row" layout-align="center center">
                 :
             </div>
             <div flex="45" layout="row" layout-align="center center">
-                <span class="md-title">{{$ctrl.match.away_result}}</span>
+                <span class="md-title" ng-if="!$ctrl.match.away_penalty">{{$ctrl.match.away_result}}</span>
+                <span class="md-title" ng-if="$ctrl.match.away_penalty">{{$ctrl.match.away_penalty}}</span>
+
                 <span class="md-subhead" style="margin-left: 4px;">{{"("}}{{$ctrl.isGuessed() ? $ctrl.guessAway : " - "}}{{")"}}</span>
             </div>
 

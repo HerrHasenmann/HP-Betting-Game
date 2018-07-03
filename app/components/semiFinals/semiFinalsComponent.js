@@ -1,9 +1,13 @@
 app.component("semiFinals", {
     templateUrl: "./components/semiFinals/semiFinalsTemplate.html",
-    controller: [SemiFinalsController]
+    controller: ["DataService", SemiFinalsController]
 });
 
-function SemiFinalsController() {
+function SemiFinalsController(DataService) {
 
     var ctrl = this;
+
+    ctrl.matches = function () {
+        return DataService.getKnockoutMatches("round_4");
+    }
 }

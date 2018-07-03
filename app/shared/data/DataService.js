@@ -40,6 +40,12 @@ app.service("DataService", ["$http", function ($http) {
             return data.groups;
         }
     };
+    
+    serv.getKnockoutMatches = function (round) {
+        if(data) {
+            return data.knockout[round].matches
+        }
+    };
 
     serv.getMatches = function () {
         return matchesById
@@ -147,6 +153,7 @@ app.service("DataService", ["$http", function ($http) {
 
             $http(config).then(function (response) {
                 data = response.data;
+                console.log(data);
 
                 sortMatches(data);
                 nextMatches = findNextMatches();

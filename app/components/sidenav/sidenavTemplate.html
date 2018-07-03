@@ -7,12 +7,14 @@
         </div>
     </md-toolbar>
 
-    <md-list flex>
-        <md-list-item ng-repeat="route in $ctrl.routes" ng-click="$ctrl.changeRoute(route)" layout="row" layout-align="start center" ng-class="{'active-route': $ctrl.isActiveRoute(route)}">
-            <md-icon md-colors="{fill: 'accent'}" md-svg-icon="{{route.icon}}"></md-icon>
-            {{route.name}}
-        </md-list-item>
-    </md-list>
+    <md-content>
+        <md-list flex>
+            <md-list-item ng-repeat="route in $ctrl.routes" ng-click="$ctrl.changeRoute(route)" layout="row" layout-align="start center" ng-class="{'active-route': $ctrl.isActiveRoute(route)}">
+                <md-icon md-colors="{fill: 'accent'}" md-svg-icon="{{route.icon}}"></md-icon>
+                {{route.name}}
+            </md-list-item>
+        </md-list>
+    </md-content>
 
     <div>
         <md-button ng-click="$ctrl.redirectToPrivacy()">

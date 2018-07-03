@@ -86,12 +86,21 @@ function MatchController($rootScope, DataService, UserService, RuleService, Auth
                 ctrl.guessAway = null;
             }
 
-            ctrl.guessPoints = RuleService.getPoints({
-                "homeTeam": ctrl.match.home_result,
-                "awayTeam": ctrl.match.away_result,
-                "guessHome": ctrl.guessHome,
-                "guessAway": ctrl.guessAway
-            });
+            if (ctrl.match.home_penalty === null && ctrl.match.away_penalty === null) {
+                ctrl.guessPoints = RuleService.getPoints({
+                    "homeTeam": ctrl.match.home_result,
+                    "awayTeam": ctrl.match.away_result,
+                    "guessHome": ctrl.guessHome,
+                    "guessAway": ctrl.guessAway
+                });
+            }else{
+                ctrl.guessPoints = RuleService.getPoints({
+                    "homeTeam": ctrl.match.home_penalty,
+                    "awayTeam": ctrl.match.away_penalty,
+                    "guessHome": ctrl.guessHome,
+                    "guessAway": ctrl.guessAway
+                });
+            }
         })
     }
 }

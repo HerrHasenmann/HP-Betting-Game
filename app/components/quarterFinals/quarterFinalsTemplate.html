@@ -1,4 +1,10 @@
 <!DOCTYPE html>
-<div layout="row" layout-align="center center" layout-fill>
-    <under-construction></under-construction>
+<div layout="row" layout-wrap layout-padding>
+    <div ng-repeat="match in $ctrl.matches()" flex-xs="100" flex-sm="50" flex-md="50" flex-lg="50" flex="25">
+
+        <md-card>
+            <match match="match"></match>
+        </md-card>
+
+    </div>
 </div>

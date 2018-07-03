@@ -2,6 +2,7 @@
   "general": {
     "group": "Gruppe"
   },
+  "teams.": "-",
   "teams": {
     "Russia" : "Russland",
     "Saudi Arabia" : "Saudi Arabien",

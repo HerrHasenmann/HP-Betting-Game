@@ -47,12 +47,21 @@ app.service("UserService", ["$rootScope", "DataService", "RuleService", function
                             var matchId = bettingRef.id;
                             var betting = bettingRef.data();
                             var match = DataService.getMatchById(matchId);
-                            var points = RuleService.getPoints({
-                                homeTeam: match.home_result,
-                                awayTeam: match.away_result,
-                                guessHome: betting.homeTeam,
-                                guessAway: betting.awayTeam
-                            });
+                            if (!match.home_penalty && !match.away_penalty) {
+                                var points = RuleService.getPoints({
+                                    homeTeam: match.home_result,
+                                    awayTeam: match.away_result,
+                                    guessHome: betting.homeTeam,
+                                    guessAway: betting.awayTeam
+                                });
+                            } else {
+                                var points = RuleService.getPoints({
+                                    homeTeam: match.home_penalty,
+                                    awayTeam: match.away_penalty,
+                                    guessHome: betting.homeTeam,
+                                    guessAway: betting.awayTeam
+                                });
+                            }
 
                             users[userId].bettings[matchId] = betting;
                             if (points > 0) {
